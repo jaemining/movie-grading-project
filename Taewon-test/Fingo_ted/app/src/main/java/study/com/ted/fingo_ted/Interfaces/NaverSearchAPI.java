@@ -16,6 +16,7 @@ public interface NaverSearchAPI {
             "X-Naver-Client-Id: yENwphZG7JRv01mCY0F8", "X-Naver-Client-Secret: _3ktvDPiRT"
     })
     @GET("v1/search/movie.xml")
-    Call<NaverSearchData> getData(@Query("query") String query);
-//    , @Query("display")int display, @Query("start") int start
+    Call<NaverSearchData> getData(@Query("query") String query,@Query("display")int display ,@Query("yearfrom")int yearfrom, @Query("yearto")int yearto);
+
+
 }

@@ -3,12 +3,10 @@ package study.com.ted.fingo_ted.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,7 +39,7 @@ public class BoxOfficeFragment extends Fragment {
 
     ListView boxOfficeList;
 
-    ArrayList<KobisData.DailyBoxOfficeList> movie_boxOffice = new ArrayList<>();
+    static ArrayList<KobisData.DailyBoxOfficeList> movie_boxOffice = new ArrayList<>();
 
     public BoxOfficeFragment() {
         /*************************************************************************************/
@@ -65,20 +63,26 @@ public class BoxOfficeFragment extends Fragment {
             @Override
             public void onResponse(Call<KobisData> call, Response<KobisData> response) {
                 if (response.isSuccessful()) {
+
                     // json 형식에 매칭되는 데이터 클래스에 응답사항을 대입.
                     KobisData data = response.body();
 
                     // Java class 로 Converting 된 데이터 중 영화 제목을 가져 옴.
                     for (KobisData.DailyBoxOfficeList temp : data.getBoxOfficeResult().getDailyBoxOfficeList()) {
-                        Log.i("BoxOffice_List", "--------------------" + temp.getMovieNm());
+                        Log.i("BoxOffice_List", "-------------------- " + temp.getMovieNm() + " | " + temp.getOpenDt());
                         movie_boxOffice.add(temp);
-                        Log.e("LIST Test", movie_boxOffice.size() + "");
                     }
 
                     // 메인 스레드(Movie_boxOffice), kobis API, NaverSearch API 가 서로 다른 스레드 흐름을 가지므로
                     // kobis API 흐름 내에서 NaverSearch API 를 호출 하도록 함.
                     // 이 부분 나중에 구조를 재설계 해야할 필요가 있음.
-//                    getNaverData(movie_boxOffice);
+
+                    String subString = movie_boxOffice.get(0).getOpenDt().substring(0,4);
+                    int date = Integer.parseInt(subString);
+                    Log.i("BoxOffice_List", "-------------------- " + movie_boxOffice.get(0).getMovieNm() + " | " + date+"");
+                    getNaverData(movie_boxOffice);
+
+                    // setBoxOfficeList () 구현 하기
                 }
             }
 
@@ -91,9 +95,9 @@ public class BoxOfficeFragment extends Fragment {
     }
 
     /*************************************************************************************/
-    /******************************* 네이버 검색 API 호출 ********************************/
+    /******************************** 네이버 검색 API 호출 ********************************/
 
-    private void getNaverData(ArrayList<String> titles) {
+    private void getNaverData(ArrayList<KobisData.DailyBoxOfficeList> movie_list) {
 
         Retrofit client = new Retrofit.Builder()
                 .baseUrl(NAVER_BASE_URL)
@@ -105,18 +109,28 @@ public class BoxOfficeFragment extends Fragment {
 
         // 영화 진흥원 API 로 부터 전달받은 BoxOffice List 를 이용해
         // For 문을 통해 순차적으로 네이버 검색 API에 get 요청을 보냄.
-        for (String query : titles) {
+        for (KobisData.DailyBoxOfficeList first : movie_list) {
 
-            Call<NaverSearchData> naverData = NaverService.getData(query);
+
+            Call<NaverSearchData> naverData = NaverService.getData(first.getMovieNm(), 1,
+                    (Integer.parseInt(first.getOpenDt().substring(0,4))-1), Integer.parseInt(first.getOpenDt().substring(0,4)));
+
             naverData.enqueue(new Callback<NaverSearchData>() {
                 @Override
                 public void onResponse(Call<NaverSearchData> call, Response<NaverSearchData> response) {
                     if (response.isSuccessful()) {
-                        NaverSearchData data = response.body();
-                        for (NaverSearchResult temp : data.channel.getItems())
-                            Log.i("NAVER TEST", "<><><><><><><><><><>" + temp.getTitle());
+
+                        NaverSearchData nData = response.body();
+                        for (NaverSearchResult second : nData.channel.getItems()){
+
+                            Log.e("NAVER TEST", "<><><><><><><><><><>" + second.getTitle());
+                            Log.e("NAVER TEST", "<><><><><><><><><><>" + second.getPubDate());
+                            Log.e("NAVER TEST", "<><><><><><><><><><>" + second.getDirector());
+                            Log.e("NAVER TEST", "<><><><><><><><><><>" + second.getUserRating());
+                        }
                     }
                 }
+
                 @Override
                 public void onFailure(Call<NaverSearchData> call, Throwable t) {
                     t.printStackTrace();
@@ -131,27 +145,27 @@ public class BoxOfficeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_box_office, container, false);
 
-        boxOfficeList = (ListView) view.findViewById(R.id.boxOfficeList);
-        ListAdapter adapter = new ListAdapter();
-        boxOfficeList.setAdapter(adapter);
-        boxOfficeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Fragment boxOfficeFragment = new BoxOfficeFragment();
-
-                FragmentManager fragmentManager = getFragmentManager();
-                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.container, boxOfficeFragment);
-                transaction.commit();
-
-            }
-        });
+//        boxOfficeList = (ListView) view.findViewById(R.id.boxOfficeList);
+//        ListAdapter adapter = new ListAdapter();
+//        boxOfficeList.setAdapter(adapter);
+//        boxOfficeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                Fragment boxOfficeFragment = new BoxOfficeFragment();
+//
+//                FragmentManager fragmentManager = getFragmentManager();
+//                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+//                transaction.replace(R.id.container, boxOfficeFragment);
+//                transaction.commit();
+//
+//            }
+//        });
 
         return view;
     }
 
-    class ListAdapter extends BaseAdapter{
+    class ListAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
