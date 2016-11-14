@@ -1,0 +1,64 @@
+package study.com.ted.fingo_ted.Fragments;
+
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import study.com.ted.fingo_ted.R;
+
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class SearchFragment extends Fragment {
+
+    EditText etSearch;
+
+    Button btnRanking;
+
+    public SearchFragment() {
+
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        etSearch = (EditText) view.findViewById(R.id.etSearch);
+        etSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 검색 디테일 보여주기
+                // 새로운 Fragment 화면으로 전환
+
+
+            }
+        });
+
+        btnRanking = (Button) view.findViewById(R.id.btnRanking);
+        btnRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 박스오피스 랭킹을 보여주는 Fragment 불러오기
+                Fragment boxOfficeFragment = new BoxOfficeFragment();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.container, boxOfficeFragment);
+                transaction.commit();
+            }
+        });
+
+        return view;
+    }
+
+
+
+}
