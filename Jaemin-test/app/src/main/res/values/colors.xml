@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#eff1f2</color>
+    <color name="colorPrimaryDark">#ceced1</color>
+    <color name="colorAccent">#e10851</color>
+    <color name="appBar">#efefef</color>
+    <color name="tabBackground">#efefef</color>
 </resources>
