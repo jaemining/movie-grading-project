@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.RelativeLayout;
 
-import study.com.ted.fingo_ted.Fragments.FavoriteFragment;
-import study.com.ted.fingo_ted.Fragments.HomeFragment;
-import study.com.ted.fingo_ted.Fragments.ProfileFragment;
-import study.com.ted.fingo_ted.Fragments.SearchFragment;
+import study.com.ted.fingo_ted.Fragments.FavoriteFragments.FavoriteFragment;
+import study.com.ted.fingo_ted.Fragments.HomeFragments.HomeFragment;
+import study.com.ted.fingo_ted.Fragments.ProfileFragments.ProfileFragment;
+import study.com.ted.fingo_ted.Fragments.SearchFragments.SearchFragment;
 import study.com.ted.fingo_ted.R;
 
 
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        container = (RelativeLayout) findViewById(R.id.container);
+        container = (RelativeLayout) findViewById(R.id.MainContainer);
 
         replaceFragment(new HomeFragment());
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -62,15 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void replaceFragment(Fragment fragment) {
 
-//        android.app.FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.container, fragment);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.container, fragment);
+        transaction.replace(R.id.MainContainer, fragment);
         transaction.commit();
     }
 

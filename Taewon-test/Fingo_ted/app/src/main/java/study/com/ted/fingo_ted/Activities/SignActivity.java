@@ -1,38 +1,32 @@
 package study.com.ted.fingo_ted.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
+import study.com.ted.fingo_ted.Fragments.SignFragments.SignMainFragment;
 import study.com.ted.fingo_ted.R;
 
 public class SignActivity extends AppCompatActivity {
 
-    Button btnSignEmail;
-    Button btnSignFB;
-    Button btnSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 
-        btnSignEmail = (Button) findViewById(R.id.btnSignEmail);
-        btnSignFB = (Button) findViewById(R.id.btnSignFB);
+        replaceFragment(new SignMainFragment());
 
-        btnSignIn = (Button) findViewById(R.id.btnSignIn);
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignActivity.this, SignInActivity.class);
-                startActivity(intent);
-                overridePendingTransition(android.support.design.R.anim.abc_fade_in, android.support.design.R.anim.abc_fade_out);
-                finish();
-            }
-        });
+    }
 
+    // pager 를 쓰지않고 단순히 Fragment 를 하나의 Layout container 에서 변경 해주기 위한 method
+    private void replaceFragment(Fragment fragment) {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.activity_sign, fragment);
+        transaction.commit();
     }
 
 }
