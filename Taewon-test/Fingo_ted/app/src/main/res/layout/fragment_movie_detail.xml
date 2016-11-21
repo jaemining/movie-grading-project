@@ -1,0 +1,246 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="study.com.ted.fingo_ted.Fragments.SearchFragments.MovieDetailFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="0dp"
+            android:paddingTop="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:id="@+id/imgStillcut"
+                    android:layout_height="250dp"
+                    android:scaleType="fitXY" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:text="보고싶어요"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnWish"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:drawableTop="@android:drawable/ic_menu_send"
+                    android:textSize="10dp" />
+
+                <Button
+                    android:text="평가하기"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnEvaluation"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:drawableTop="@android:drawable/ic_menu_myplaces"
+                    android:textSize="10dp" />
+
+                <Button
+                    android:text="코멘트"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnComment"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:drawableTop="@android:drawable/ic_menu_edit"
+                    android:textSize="10dp" />
+
+                <Button
+                    android:text="공유하기"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnshare"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:drawableTop="@android:drawable/ic_menu_share"
+                    android:textSize="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView10"
+                    android:text="줄거리"
+                    android:layout_margin="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat" />
+
+                <TextView
+                    android:text="-"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvStory"
+                    android:layout_margin="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:text="갤러리"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView11"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:layout_margin="10dp" />
+
+                <GridView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/gvGallayList"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:text="출연/제작"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView12"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:layout_margin="10dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@mipmap/ic_launcher"
+                            android:id="@+id/imgDirector" />
+
+                        <TextView
+                            android:text="감독"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/tvDirector"
+                            android:layout_margin="10dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:text="감독"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/textView5"
+                            android:gravity="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@mipmap/ic_launcher"
+                            android:id="@+id/imgActor1" />
+
+                        <TextView
+                            android:text="배우 1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/tvActor1"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:text="주연"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView13"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@mipmap/ic_launcher"
+                            android:id="@+id/imgActor2" />
+
+                        <TextView
+                            android:text="배우 2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/tvActor2"
+                            android:layout_margin="10dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:text="조연"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/textView14"
+                            android:gravity="center" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
