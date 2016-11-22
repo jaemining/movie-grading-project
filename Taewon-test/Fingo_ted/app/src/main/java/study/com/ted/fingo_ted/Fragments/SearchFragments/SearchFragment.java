@@ -1,4 +1,4 @@
-package study.com.ted.fingo_ted.Fragments;
+package study.com.ted.fingo_ted.Fragments.SearchFragments;
 
 
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import study.com.ted.fingo_ted.R;
 public class SearchFragment extends Fragment {
 
     EditText etSearch;
-
     Button btnRanking;
 
     public SearchFragment() {
@@ -32,13 +31,15 @@ public class SearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         etSearch = (EditText) view.findViewById(R.id.etSearch);
-        etSearch.setOnClickListener(new View.OnClickListener() {
+        etSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                // 검색 디테일 보여주기
-                // 새로운 Fragment 화면으로 전환
+            public void onFocusChange(View v, boolean hasFocus) {
+                Fragment searchDetailFragment = new SearchDetailFragment();
 
-
+                FragmentManager fragmentManager = getFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.searchContainer, searchDetailFragment);
+                transaction.commit();
             }
         });
 
@@ -51,14 +52,13 @@ public class SearchFragment extends Fragment {
 
                 FragmentManager fragmentManager = getFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.container, boxOfficeFragment);
+                transaction.replace(R.id.MainContainer, boxOfficeFragment);
                 transaction.commit();
             }
         });
 
         return view;
     }
-
 
 
 }

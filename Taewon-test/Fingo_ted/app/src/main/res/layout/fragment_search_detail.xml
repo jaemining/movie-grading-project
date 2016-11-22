@@ -2,15 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="study.com.ted.fingo_ted.Fragments.FavoriteFragments.FavoriteFragment">
+    tools:context="study.com.ted.fingo_ted.Fragments.SearchFragments.SearchDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="50dp"
-        android:text="공사중"
-        android:gravity="center"
-        />
-
+        android:id="@+id/searchDetailList" />
 </FrameLayout>
