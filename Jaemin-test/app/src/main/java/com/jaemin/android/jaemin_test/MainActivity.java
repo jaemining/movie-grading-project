@@ -52,43 +52,8 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(mPagerAdapter);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-        mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                Log.d("onTabSelected", "onTabSelected() " + tab.getPosition());
-
-                switch (tab.getPosition()) {
-                    case 0:
-                        mViewPager.setCurrentItem(0);
-                        break;
-                    case 1:
-                        mViewPager.setCurrentItem(1);
-                        break;
-                    case 2:
-                        mViewPager.setCurrentItem(2);
-                        break;
-                    case 3:
-                        mViewPager.setCurrentItem(3);
-                        break;
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        mTabLayout.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
 
     }
